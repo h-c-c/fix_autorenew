@@ -1,0 +1,26 @@
+<?php
+// This is a workaround for CRM-19608
+//You must manually add in the relevant contribution page IDs to the line 
+//containing the first conditional in this code.
+
+function fix_autorenew_civicrm_validateForm($formName, &$fields, &$files, &$form, &$errors) {
+
+    if ($formName == "CRM_Contribute_Form_Contribution_Main" && ($form->_id == ( 1 || 2 )))   {
+   
+	    if (!empty($form->controller->_pages['Confirm']->_submitValues['auto_renew'])) { 
+	     	    $autoRenew = $form->controller->_pages['Confirm']->_submitValues['auto_renew'];
+	    } else {
+		    $autoRenew =   "Null";
+	    }
+
+    //    If this module breaks, uncomment to debug
+    //    CRM_Core_Error::debug($form, $variable = null, $log = true, $html = true);
+    //   CRM_Core_Error::debug($autoRenew, $variable = null, $log = true, $html = true);
+
+       if ( $autoRenew == "Null" ) {
+          $errors['auto_renew'] = ts( 'Auto Renew is a required field. Please ask someone to walk you through our terms of service.  Thank you.' );
+       } 
+       }
+    }
+    return;
+

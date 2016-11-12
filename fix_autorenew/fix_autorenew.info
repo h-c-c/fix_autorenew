@@ -1,0 +1,6 @@
+name = Fix Autorenew Required 
+description = A workaround for CRM-19608. 
+dependencies[] = civicrm
+package = CiviCRM
+core = 7.x
+version = 1.0
