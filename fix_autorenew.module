@@ -5,7 +5,7 @@
 
 function fix_autorenew_civicrm_validateForm($formName, &$fields, &$files, &$form, &$errors) {
 
-    if ($formName == "CRM_Contribute_Form_Contribution_Main" && ($form->_id == ( 1 || 2 )))   {
+    if ($formName == "CRM_Contribute_Form_Contribution_Main" && ($form->_id == 1 ||  $form->_id == 2 ))   {
    
 	    if (!empty($form->controller->_pages['Confirm']->_submitValues['auto_renew'])) { 
 	     	    $autoRenew = $form->controller->_pages['Confirm']->_submitValues['auto_renew'];
@@ -21,6 +21,6 @@ function fix_autorenew_civicrm_validateForm($formName, &$fields, &$files, &$form
           $errors['auto_renew'] = ts( 'Auto Renew is a required field. Please ask someone to walk you through our terms of service.  Thank you.' );
        } 
        }
-    }
     return;
+    }
 
